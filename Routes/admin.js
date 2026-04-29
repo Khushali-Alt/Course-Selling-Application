@@ -2,6 +2,9 @@ const {Router}= require("express");
 const adminRouter=Router();
 const {adminModel}= require("../db.js");
 
+// import bcrypt from "bcrypt";
+// import * as z from "zod";
+//bcrypt, zod, jsonWebToken
 
 adminRouter.post(" /signup", function(req, res){
     res.json({
@@ -23,21 +26,21 @@ adminRouter.post(" /signin", function(req, res){
 // adminRouter.use(adminMiddleware);
 
 //course creation by admin
-adminRouter.post("/", function(req, res){
+adminRouter.post("/course", function(req, res){
     res.json({
         message: "admin course"
     })
 })
 
 //admin can change in the post
-adminRouter.put("/", function(req, res){
+adminRouter.put("/course", function(req, res){
     res.json({
         message: "admin course"
     })
 })
 
 //admin get all the courses that created
-adminRouter.get("/bulk", function(req, res){
+adminRouter.get("/course/bulk", function(req, res){
     res.json({
         message: "admin course"
     })
