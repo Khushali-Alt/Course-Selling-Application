@@ -2,7 +2,9 @@ const {Router}= require("express");
 const adminRouter=Router();
 const {adminModel}= require("../db.js");
 const jwt=require ("jsonwebtoken");
-const JWT_ADMIN_PASSWORD= "khushalitiwarri123455678";
+
+const {JWT_ADMIN_PASSWORD}=require("../config.js");
+const { adminMiddleware } = require("../middleware/admin.js");
 
 // import bcrypt from "bcrypt";
 // import * as z from "zod";
@@ -83,9 +85,21 @@ adminRouter.post("/signin", async function(req, res){
 // adminRouter.use(adminMiddleware);
 
 //course creation by admin
-adminRouter.post("/course", function(req, res){
+adminRouter.post("/course", adminMiddleware, async function(req, res){
+       const adminId=req.userId;
+       const { title, description, imageUrl, price}= req.body;
+
+       //creating web3 Saas
+    const course = await courseModel.create({
+        title:title,
+        description: description,
+        imageUrl:imageUrl, //taking imageUrl from user-> its bad
+        price:price,
+        creatorId: adminId
+    })
     res.json({
-        message: "admin course"
+        message: "Course created",
+        courseId: course._id
     })
 })
 
