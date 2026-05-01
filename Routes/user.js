@@ -4,7 +4,8 @@
 const {Router}=require("express") // do the same as above both line
 const {userModel} =require("../db")
 const jwt=require ("jsonwebtoken");
-const JWT_USER_PASSWORD="asdfghkllk*"
+
+const {JWT_USER_PASSWORD} =require("../config");
 
 const userRouter=Router();
 
