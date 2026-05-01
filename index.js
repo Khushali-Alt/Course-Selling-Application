@@ -14,10 +14,15 @@ mongoose.connect(process.env.MONGO_URL)
 // createCourseRoutes(app); // its not clearly defining
 // createUserRoutes(app);
 
+//middleware -->> req.body se data tabhi jayega db me agar ye middleware hua to
+app.use(express.json());
+
+
+
 // app.use("/api/v1/user", userV2Router); -->> its a benifit for future
 app.use("/api/v1/user", userRouter); // its a good way to do Backend
 app.use("/api/v1/course", courseRouter);
-app.use("/app/v1/admin", adminRouter);
+app.use("/api/v1/admin", adminRouter);
 
 
 
