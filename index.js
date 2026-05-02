@@ -19,6 +19,8 @@ app.use(express.json());
 
 
 
+
+
 // app.use("/api/v1/user", userV2Router); -->> its a benifit for future
 app.use("/api/v1/user", userRouter); // its a good way to do Backend
 app.use("/api/v1/course", courseRouter);

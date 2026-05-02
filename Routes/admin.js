@@ -103,19 +103,47 @@ adminRouter.post("/course", adminMiddleware, async function(req, res){
     })
 })
 
+
+
 //admin can change in the post
-adminRouter.put("/course", function(req, res){
+adminRouter.put("/course", adminMiddleware,  async function(req, res){
+    const adminId=req.userId;
+
+    const { title, description, imageUrl, price, courseId }=req.body;
+
+  //creating web3 Saas
+    const course = await courseModel.updateOne({
+        //it protect to change others course with mixednatched
+        _id: courseId,
+        creatorId: adminId
+    },{
+        title:title,
+        description: description,
+        imageUrl:imageUrl, //taking imageUrl from user-> its bad
+        price:price
+    })
     res.json({
-        message: "admin course"
+        message: "Course Updated ",
+        courseId: course._id
     })
 })
 
+
+
+
 //admin get all the courses that created
-adminRouter.get("/course/bulk", function(req, res){
+adminRouter.get("/courses/bulk",adminMiddleware, async function(req, res){
+    const adminId=req.userId;
+
+    const courses = await courseModel.find({
+        creatorId: adminId
+    });
+
     res.json({
-        message: "admin course"
-    })
+        message: "Course Updated ",
+        courses
 })
+});
 
 
 module.exports={
